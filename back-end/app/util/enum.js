@@ -1,0 +1,15 @@
+// 发布状态
+const PUBLIC_STATUS = {
+  UNPUBLISHED: '0',
+  PUBLISHED: '1',
+};
+
+const PUBLIC_STATUS_DESC = {
+  [PUBLIC_STATUS.UNPUBLISHED]: '待发布',
+  [PUBLIC_STATUS.PUBLISHED]: '已发布',
+};
+
+module.exports = {
+  PUBLIC_STATUS,
+  PUBLIC_STATUS_DESC,
+};
