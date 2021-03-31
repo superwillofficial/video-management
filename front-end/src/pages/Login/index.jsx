@@ -40,7 +40,7 @@ export default () => useObserver(() => {
             onFinish={onFinish}
             wrapperCol={{ span: 18 }}>
             <FormItem
-              name="userId"
+              name="userAccount"
               rules={[{ required: true, message: '账号必填' }]}
             >
               <Input

@@ -1,15 +1,10 @@
 import React, { useEffect, Fragment } from "react";
-import ReactPlayer from 'react-player';
 import { useObserver } from "mobx-react-lite";
-import { Button, Table, message, Pagination, Card, Avatar } from "antd";
+import { message, Pagination, Card } from "antd";
 import {
-  EditOutlined,
-  EllipsisOutlined,
   DeleteOutlined,
-  UndoOutlined,
   CheckOutlined,
 } from '@ant-design/icons';
-import { onColumn } from "@utils/table";
 import { useStore } from "../store";
 import { PUBLIC_STATUS, PUBLIC_STATUS_DESC } from "@config/consts";
 
@@ -55,18 +50,6 @@ export default () => useObserver(() => {
   const pagination = usePagination();
   const data = store.vidList;
 
-
-  const handleDelete = async (item) => {
-    await store.deleteFile(item['video']);
-    const res = await store.onDelete(item['id']);
-    if (res) {
-      message.success('删除成功');
-      await store.getVidList();
-    } else {
-      message.error(`服务错误, ${store.message}`);
-    }
-  };
-
   return (
     <div>
       <div style={{
@@ -75,9 +58,9 @@ export default () => useObserver(() => {
         justifyContent: 'space-around'
       }}
       >
-        {data.map((item, index) =>
+        {_.map(data, (item, index) =>
           <Card
-            style={{ width: 300, marginTop: 20 }}
+            style={{ width: 200, marginTop: 20 }}
             cover={
               <video
                 width='300'
@@ -85,37 +68,6 @@ export default () => useObserver(() => {
                 src={item['video']}
 
               />
-            }
-            actions={PUBLIC_STATUS_DESC[item['status']] === '已发布' ?
-              [
-                <div onClick={async () => {
-                  item['status'] = '0';
-                  const isSuccess = await store.onEdit(item);
-                  if (isSuccess) {
-                    message.success(`撤回成功`);
-                    await store.getVidList();
-                  } else {
-                    message.error(`服务错误, ${store.message}`);
-                  }
-                }}
-                >撤回
-                </div>
-              ] :
-              [
-                // 删除
-                <DeleteOutlined key="setting" onClick={() => handleDelete(item)} />,
-                // 发布
-                <CheckOutlined key="publish" onClick={async () => {
-                  item['status'] = '1';
-                  const isSuccess = await store.onEdit(item);
-                  if (isSuccess) {
-                    message.success(`发布成功`);
-                    await store.getVidList();
-                  } else {
-                    message.error(`服务错误, ${store.message}`);
-                  }
-                }} />,
-              ]
             }
             key={item['id']}
           >
