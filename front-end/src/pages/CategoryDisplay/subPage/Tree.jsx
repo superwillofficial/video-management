@@ -21,9 +21,9 @@ export default () => useObserver(() => {
   const jsonData = JSON.stringify(data).replace(/id/g, 'key').replace(/category/g, 'title');
   const treeData = JSON.parse(jsonData);
   const treeDataWithRoot = [{ key: 0, title: '根节点', children: treeData }];
-  console.log('treeData', treeData);
+  // console.log('treeData', treeData);
   const onSelect = async (selectedKeys, info) => {
-    console.log('selected', selectedKeys, info);
+    // console.log('selected', selectedKeys, info);
     await store.getVidList({ categoryId: selectedKeys[0] });
   };
 

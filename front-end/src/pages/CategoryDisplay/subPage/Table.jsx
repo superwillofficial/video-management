@@ -8,9 +8,6 @@ import { useStore } from "../store";
 import { PUBLIC_STATUS_DESC } from '@config/consts';
 
 const useColumns = () => {
-
-  const store = useStore();
-
   return [
     onColumn("影片id", "id"),
     onColumn("影片标题", "title"),

@@ -42,7 +42,7 @@ module.exports = {
   },
 
   CategoryDisplay: {
-    text: '分类层级展示', path: '/video/category-display', parent: 'Video',
+    text: '分类影视管理', path: '/video/category-display', parent: 'Video',
     component: 'CategoryDisplay', nav: true, exact: true,
   },
 
